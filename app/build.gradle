@@ -1,0 +1,47 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.lualvsil.naloader'
+    compileSdkVersion 36
+    buildToolsVersion "36.1.0"
+    ndkVersion "29.0.14033849"
+
+    defaultConfig {
+        applicationId "com.lualvsil.naloader"
+        minSdk 33
+        targetSdk 36
+        versionCode 1
+        versionName "1.0"
+
+        externalNativeBuild {
+            cmake {
+                arguments "-DANDROID_STL=c++_shared"
+            }
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            version '3.18.5+'
+            path 'src/main/cpp/CMakeLists.txt'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    packagingOptions {
+        jniLibs {
+            keepDebugSymbols += ['**/*.so']
+        }
+    }
+}
+
+
+dependencies {
+    implementation("com.google.android.material:material:1.9.0")
+}
